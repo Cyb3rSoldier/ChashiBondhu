@@ -6,24 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChashiBondhu</title>
     <link rel="stylesheet" href="design.css">
+    <link rel="logo" href="asset/img/ChashiBondhu logo.png">
     <!-- tailwindcss CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
     <div>
-        <nav>
-            <img src="ChashiBondhu logo.png">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Login</a></li>
-            </ul>
+        <nav class="flex h-38 w-max p-5 justify-between bg-slate-900 items-center">
+            <div class="flex items-center gap-5 text-4xl font-bold text-amber-100">
+            <img class="w-14 h-14 rounded-3xl" src="./asset/img/ChashiBondhu logo.png">
+            <h1>ChashiBondhu</h1>
+            </div>
+            <div class="group">
+                <ul class="flex text-yellow-100 font-bold gap-5">
+                    <li><a class="focus:text-cyan-600" href="#">Home</a></li>
+                    <li><a class="focus:text-cyan-600" href="#">About Us</a></li>
+                    <li><a class="focus:text-cyan-600" href="#">Contact</a></li>
+                    <li><a class="focus:text-cyan-600" href="#">Login</a>
+                        <ul class="h-22 w-40 p-1 mt-3 rounded-2xl font-bold text-red-950 text-[12px] bg-slate-300">
+                            <li class="hover:bg-blue-200 hover:rounded-2xl p-2" href="#">Loign as Consumer</li>
+                            <li class="hover:bg-blue-200 hover:rounded-2xl p-2 " href="#">Login as Farmer</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
         </nav>
+
     </div>
     <div>
-        <h2 class=" font-[600] text-2xl text-red-950">
+        <h2 class=" font-semibold text-2xl text-red-950">
             ChashiBondhu - From Farmer To You!
             A farmer-consumer platform.
         </h2>
