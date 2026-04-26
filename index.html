@@ -18,27 +18,27 @@
 </style>
 
 <body>
-    <header class="bg-slate-800">
-        <div class="rounded-bl-2xl bg-slate-800 fixed top-0 left-0 w-full z-50 md:rounded-bl-4xl">
+    <header>
+        <div class="rounded-bl-2xl bg-green-900/80 fixed top-0 left-0 w-full z-50 md:rounded-bl-4xl">
             <nav class="px-5 flex py-4 justify-between  items-center container mx-auto md:px-10">
                 <div class="flex items-center gap-3 font-bold text-amber-50">
-                    <img class="w8 h-8 md:w-10 h-10 rounded-2xl z-100" src="./asset/img/ChashiBondhu logo.png">
-                    <p class="text-[20px] md:text-[25px] font-serif">ChashiBondhu</p>
+                    <img class="w-10 h-10 rounded-2xl" src="./asset/img/ChashiBondhu logo.png">
+                    <p class="text-[20px] md:text-[25px] font-serif ">ChashiBondhu</p>
                 </div>
 
                 <ul id="nav-menu" class="hidden md:flex text-amber-100 font-bold gap-10 items-center">
-                    <li><a class="hover:text-blue-200 focus:text-blue-200 text-[15px]" href="index.html">Home</a></li>
-                    <li><a class="hover:text-blue-200 focus:text-blue-200 text-[15px]" href="#">About Us</a></li>
-                    <li><a class="hover:text-blue-200 focus:text-blue-200 text-[15px]" href="#">Contact</a></li>
+                    <li><a ctext-teal-100 focus:text-teal-100 text-[15px]" href="index.html">Home</a></li>
+                    <li><a class="hover:text-teal-100 focus:text-teal-100 text-[15px]" href="#">About Us</a></li>
+                    <li><a class="hover:text-teal-100 focus:text-teal-100 text-[15px]" href="#">Contact</a></li>
                     <li class="group relative">
-                        <a class="hover:text-blue-200 text-[15px]" href="#">Login</a>
+                        <a class="hover:text-teal-100 text-[15px]" href="#">Login</a>
                         <ul
-                            class="w-max p-1 mt-3 rounded-tl-2xl font-bold text-red-950 text-[12px] bg-slate-100 absolute right-0 opacity-0 group-hover:opacity-100 space-y-1.5 transition duration-500 scale-50 group-hover:scale-100 origin-top-right">
-                            <li><a class="block hover:bg-amber-50 hover:rounded-tl-lg p-1"
+                            class="w-max p-1 mt-3 rounded-tl-2xl font-bold text-neutral-950 text-[13px] bg-green-200 absolute right-0 opacity-0 group-hover:opacity-90 space-y-1.5 transition duration-500 scale-50 group-hover:scale-100 origin-top-right">
+                            <li><a class="block hover:bg-blue-100 hover:rounded-tl-lg p-1"
                                     href="consumerLogin.html">Login
                                     as
                                     Consumer</a></li>
-                            <li><a class="block hover:bg-amber-50 hover:rounded-tl-lg p-1" href="farmerLogin.html">Login
+                            <li><a class="block hover:bg-blue-100 hover:rounded-tl-lg p-1" href="farmerLogin.html">Login
                                     as
                                     Farmer</a></li>
                         </ul>
@@ -46,10 +46,38 @@
                 </ul>
 
                 <button class="p-2 md:hidden" onclick="handelMenu()">
-                    <i class="fa-sharp fa-solid fa-bars" style="color: rgb(255, 255, 255);"></i>
+                    <i class="text-2xl fa-sharp fa-solid fa-bars" style="color: rgb(255, 255, 255);"></i>
                 </button>
 
-                <div></div>
+                <!-- mobile menu -->
+                <div id="nav-dialog"
+                    class="hidden fixed inset-0 rounded-bl-2xl bg-[#1a5135] opacity-100 top-0 left-0 w-full h-70 z-100 md:hidden">
+                    <div class="px-5 flex py-4 justify-between  items-center container mx-auto md:px-10">
+                        <div class="flex items-center gap-3 font-bold text-amber-50">
+                            <img class="w8 h-8 md:w-10 h-10 rounded-2xl" src="./asset/img/ChashiBondhu logo.png">
+                            <p class="text-[20px] md:text-[25px] font-serif ">ChashiBondhu</p>
+                        </div>
+                        <button class="p-2 md:hidden" onclick="handelMenu()">
+                            <i class="text-2xl fa-solid fa-xmark" style="color: rgb(255, 255, 255);"></i>
+                        </button>
+                    </div>
+                    <div>
+                        <ul class="text-amber-100 flex flex-col text-2xl text-center">
+                            <li><a class="hover:text-teal-100 p-2 block font-bold focus:text-teal-100 text-[15px]"
+                                    href="index.html">Home</a></li>
+                            <li><a class="hover:text-teal-100 focus:text-teal-100 p-2 block font-bold text-[15px]" href="#">About Us</a>
+                            </li>
+                            <li><a class="hover:text-teal-100 focus:text-teal-100 p-2 block font-bold text-[15px]" href="#">Contact</a></li>
+                            <li><a class="hover:text-teal-100 focus:text-teal-100 p-2 block font-bold text-[15px]"
+                                    href="farmerLogin.html">Login as Farmer</a>
+                            </li>
+                            <li><a class="hover:text-teal-100 focus:text-teal-100 p-2 block font-bold text-[15px]"
+                                    href="consumerLogin.html">Login as Consumer</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
             </nav>
         </div>
     </header>
@@ -65,8 +93,10 @@
 
     <!-- JS code -->
     <script>
+        const navvDialog = document.getElementById('nav-dialog');
+
         function handelMenu() {
-            console.log('first');
+            navvDialog.classList.toggle('hidden');
         }
     </script>
 
