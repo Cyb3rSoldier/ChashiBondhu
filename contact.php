@@ -107,7 +107,9 @@ session_start();
                     <h3 class="text-xl font-bold text-green-950 mb-1">Send a Message</h3>
                     <p class="text-stone-400 text-sm mb-8">We'll get back to you within 24 hours.</p>
 
-                    <form action="contact_submit.php" method="POST" class="space-y-5">
+                    <!---------- CONTACT FORM ---------->
+
+                    <form action="controlContact.php" method="POST" id="contact" class="space-y-5">
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                             <div>
@@ -150,6 +152,18 @@ session_start();
                             <textarea name="message" rows="5" placeholder="Write your message here..." required
                                 class="w-full bg-stone-100 border border-stone-200 text-stone-800 placeholder-stone-400 text-sm px-4 py-3 rounded-xl outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition duration-200 resize-none"></textarea>
                         </div>
+
+                        <!-- Success message -->
+                        <div class="form-message">
+                            <?php if (isset($_SESSION['message_success'])): ?>
+                                <div class="bg-green-50 border border-green-200 text-green-700 text-sm font-semibold px-4 py-3 rounded-xl flex items-center gap-2">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <?php echo $_SESSION['message_success'];
+                                    unset($_SESSION['message_success']); ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+
 
                         <button type="submit"
                             class="w-full bg-green-700 hover:bg-green-600 active:bg-green-800 text-white font-bold py-3.5 rounded-xl transition duration-200 shadow-md flex items-center justify-center gap-2 text-sm">
