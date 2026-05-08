@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,10 @@
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
-    body { font-family: 'Roboto', sans-serif; }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
 </style>
 
 <body class="bg-green-100 min-h-screen overflow-x-hidden">
@@ -30,6 +34,21 @@
                     <h3 class="text-2xl font-bold text-green-950">Create your farmer account</h3>
                     <p class="text-stone-400 text-sm mt-1">Fill in your details to start selling directly</p>
                 </div>
+
+                <?php if (isset($_SESSION['reg_error'])): ?>
+                    <div class="bg-red-50 border border-red-200 text-red-600 text-sm font-semibold px-4 py-3 rounded-xl mb-5 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                        <?php echo $_SESSION['reg_error'];
+                        unset($_SESSION['reg_error']); ?>
+                    </div>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['reg_success'])): ?>
+                    <div class="bg-red-50 border border-red-200 text-green-600 text-sm font-semibold px-4 py-3 rounded-xl mb-5 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                        <?php echo $_SESSION['reg_success'];
+                        unset($_SESSION['reg_success']); ?>
+                    </div>
+                <?php endif; ?>
 
                 <form action="farmerRegisterSubmit.php" method="POST" enctype="multipart/form-data" class="space-y-4">
 
@@ -274,4 +293,5 @@
     </script>
 
 </body>
+
 </html>

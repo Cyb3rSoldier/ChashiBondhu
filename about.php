@@ -24,17 +24,13 @@ session_start();
         <div class="max-w-7xl mx-auto">
 
             <div class="text-center mb-20">
-                <h2 class="text-4xl md:text-5xl font-bold text-green-950 leading-tight">
-                   <u>About <span class="text-green-900 ">ChashiBondhu</u></span>
-                </h2>
-                <p class="text-black mt-5 max-w-3xl mx-auto text-1xl md:text-lg">
+                <p class="text-green-950 mt-5 mx-auto text-1xl md:text-2xl">
                     ChashiBondhu is Bangladesh's farmer-consumer digital marketplace — built to cut out the middlemen, ensure fair prices, and bring fresh produce straight from the farm to your door.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
                 <div>
-                    <span class="inline-block bg-amber-100 text-green-700 text-1xl md:text-3xl font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-4">Our Story</span>
                     <h3 class="text-3xl md:text-4xl font-bold text-green-950 leading-snug mb-6">
                         From the Farmer To You...!
                     </h3>

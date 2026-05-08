@@ -22,34 +22,36 @@
                     <p class="text-xl md:text-2xl font-bold font-serif tracking-wide">ChashiBondhu</p>
                 </div>
 
-                <ul class="hidden md:flex text-white/90 font-semibold gap-8 items-center">
+                <ul class="hidden md:flex text-white font-bold gap-8 items-center">
                     <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
                             href="index.php">Home</a></li>
+                    <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
+                            href="index.php#marketplace">Market Place</a></li>
                     <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
                             href="about.php">About Us</a></li>
                     <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
                             href="contact.php">Contact</a></li>
                     <li class="group relative">
-    <a class="flex items-center gap-1 hover:text-white transition duration-200 text-sm tracking-wide" href="#">
-        Login <i class="fa-solid fa-chevron-down text-xs mt-0.5 transition-transform duration-200 group-hover:rotate-180"></i>
-    </a>
-    <ul class="w-48 p-2 mt-3 rounded-xl font-semibold text-neutral-800 text-sm bg-white shadow-2xl absolute right-0 
+                        <a class="flex items-center gap-1 hover:text-white transition duration-200 text-sm tracking-wide" href="#">
+                            Login <i class="fa-solid fa-chevron-down text-xs mt-0.5 transition-transform duration-200 group-hover:rotate-180"></i>
+                        </a>
+                        <ul class="w-48 p-2 mt-3 rounded-xl font-semibold text-neutral-800 text-sm bg-white shadow-2xl absolute right-0 
         opacity-0 group-hover:opacity-100 
         scale-95 group-hover:scale-100 
         origin-top-right 
         transition-all duration-200 
         pointer-events-none group-hover:pointer-events-auto
         delay-0 group-hover:delay-0"
-        style="transition-delay: 0ms; padding-top: 8px;">
-        <div class="absolute -top-3 left-0 right-0 h-3"></div>
-        <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition duration-150" href="consumerLogin.php">
-            <i class="fa-solid fa-user text-green-700 text-xs w-4"></i> Login as Consumer
-        </a></li>
-        <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition duration-150" href="farmerLogin.php">
-            <i class="fa-solid fa-tractor text-green-700 text-xs w-4"></i> Login as Farmer
-        </a></li>
-    </ul>
-</li>
+                            style="transition-delay: 0ms; padding-top: 8px;">
+                            <div class="absolute -top-3 left-0 right-0 h-3"></div>
+                            <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition duration-150" href="consumerLogin.php">
+                                    <i class="fa-solid fa-user text-green-700 text-xs w-4"></i> Login as Consumer
+                                </a></li>
+                            <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition duration-150" href="farmerLogin.php">
+                                    <i class="fa-solid fa-tractor text-green-700 text-xs w-4"></i> Login as Farmer
+                                </a></li>
+                        </ul>
+                    </li>
                 </ul>
 
                 <button class="p-2 md:hidden text-white" onclick="handelMenu()">
@@ -67,9 +69,11 @@
                             <i class="text-2xl fa-solid fa-xmark"></i>
                         </button>
                     </div>
-                    <ul class="text-white flex flex-col mt-4 px-4 gap-1">
+                    <ul class="text-white/90 flex flex-col mt-4 px-4 gap-1">
                         <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
                                 href="index.php"><i class="fa-solid fa-house mr-3 text-green-400"></i>Home</a></li>
+                        <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
+                                href="index.php#marketplace"><i class="fa-solid fa-store mr-3 text-green-400"></i>Market Place</a></li>
                         <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
                                 href="about.php"><i class="fa-solid fa-circle-info mr-3 text-green-400"></i>About Us</a></li>
                         <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"

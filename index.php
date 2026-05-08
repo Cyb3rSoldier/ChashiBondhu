@@ -15,7 +15,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-stone-50 overflow-x-hidden">
+<body class="bg-green-100/70 overflow-x-hidden">
 
     <!-- NAV BAR -->
     <?php include 'navbar.php' ?>
@@ -76,6 +76,35 @@ session_start();
             class="scroll-hint absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 text-xs">
             <span class="tracking-widest uppercase text-[10px]">Scroll</span>
             <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Marketplace -->
+
+    <section id="marketplace" class="py-16">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Section Header -->
+            <div class="text-center mb-8 px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-green-950 mb-3">
+                    🛒 Fresh From Farms
+                </h2>
+                <p class="text-stone-500 text-base md:text-lg">
+                    Buy directly from farmers across Bangladesh — fresh, fair, and chemical-free
+                </p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar max-w-xl mx-auto mb-6">
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-stone-400"></i>
+                    <input type="text"
+                        id="productSearch"
+                        placeholder="Search fresh vegetables, fruits, grains..."
+                        onkeyup="searchProducts()"
+                        class="w-full pl-10 pr-4 py-3 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100">
+                </div>
+            </div>
         </div>
     </section>
 

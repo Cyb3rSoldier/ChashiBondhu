@@ -60,7 +60,7 @@
                 <ul class="space-y-3 text-sm">
                     <li><a href="consumerLogin.php" class="hover:text-green-400 transition duration-200 flex items-center gap-2"><i class="fa-solid fa-user text-green-600 text-xs"></i>Login as Consumer</a></li>
                     <li><a href="farmerLogin.php" class="hover:text-green-400 transition duration-200 flex items-center gap-2"><i class="fa-solid fa-tractor text-green-600 text-xs"></i>Login as Farmer</a></li>
-                    <li><a href="#" class="hover:text-green-400 transition duration-200 flex items-center gap-2"><i class="fa-solid fa-shop text-green-600 text-xs"></i>Browse Products</a></li>
+                    <li><a href="index.php#marketplace" class="hover:text-green-400 transition duration-200 flex items-center gap-2"><i class="fa-solid fa-shop text-green-600 text-xs"></i>Browse Products</a></li>
                     <li><a href="#" class="hover:text-green-400 transition duration-200 flex items-center gap-2"><i class="fa-solid fa-headset text-green-600 text-xs"></i>Support Center</a></li>
                 </ul>
             </div>
