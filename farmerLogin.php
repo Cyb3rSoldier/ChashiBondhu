@@ -68,6 +68,26 @@ session_start();
                     <p class="text-stone-400 text-sm mt-1">Enter your credentials to continue</p>
                 </div>
 
+                <?php if (isset($_SESSION['login_error'])): ?>
+                    <div class="mb-5 bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-xl text-sm font-medium">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <span><?= $_SESSION['login_error']; ?></span>
+                        </div>
+                    </div>
+                    <?php unset($_SESSION['login_error']); ?>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['success_message'])): ?>
+                    <div class="mb-5 bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-xl text-sm font-medium">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span><?= $_SESSION['success_message']; ?></span>
+                        </div>
+                    </div>
+                    <?php unset($_SESSION['success_message']); ?>
+                <?php endif; ?>
+
                 <form action="farmerLoginSubmit.php" method="POST" class="space-y-5">
 
                     <div>
@@ -76,7 +96,7 @@ session_start();
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">
                                 <i class="fa-solid fa-envelope text-sm"></i>
                             </span>
-                            <input type="email" name="" placeholder="your@email.com" required
+                            <input type="email" name="email" placeholder="your@email.com" required
                                 class="w-full bg-stone-50 border border-stone-200 text-stone-800 placeholder-stone-400 text-sm pl-10 pr-4 py-3 rounded-xl outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition duration-200">
                         </div>
                     </div>
@@ -101,7 +121,7 @@ session_start();
                             <input type="checkbox" name="remember" class="accent-green-600 w-4 h-4">
                             Remember me
                         </label>
-                        <a href="forgotPassword.php" class="text-green-600 hover:text-green-800 font-semibold transition">Forgot password?</a>
+                        <a href="#" class="text-green-600 hover:text-green-800 font-semibold transition">Forgot password?</a>
                     </div>
 
                     <button type="submit"

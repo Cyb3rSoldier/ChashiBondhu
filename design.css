@@ -151,3 +151,62 @@
          object-position: 65% center;
      }
  }
+
+ .serif {
+     font-family: 'Playfair Display', serif;
+ }
+
+ .stat-card {
+     transition: transform .25s ease, box-shadow .25s ease;
+ }
+
+ .stat-card:hover {
+     transform: translateY(-4px);
+     box-shadow: 0 12px 32px rgba(0, 0, 0, .1);
+ }
+
+ .action-icon {
+     transition: transform .25s ease;
+ }
+
+ .action-card:hover .action-icon {
+     transform: scale(1.15);
+ }
+
+ @keyframes fadeUp {
+     from {
+         opacity: 0;
+         transform: translateY(18px);
+     }
+
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
+
+ .fade-up {
+     animation: fadeUp .5s ease both;
+ }
+
+ .delay-1 {
+     animation-delay: .08s;
+ }
+
+ .delay-2 {
+     animation-delay: .16s;
+ }
+
+ .delay-3 {
+     animation-delay: .24s;
+ }
+
+ .delay-4 {
+     animation-delay: .32s;
+ }
+
+ .delay-5 {
+     animation-delay: .40s;
+ }
+
+ 

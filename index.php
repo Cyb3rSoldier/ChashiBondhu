@@ -42,7 +42,7 @@ session_start();
 
             <p class="hero-subtitle text-base md:text-lg text-stone-300 mt-5 max-w-lg leading-relaxed">
                 ChashiBondhu connects farmers directly with consumers <br>
-                <span class="text-[15px]">"Fresh products, fair prices, and zero middlemen"</span>
+                <span class="text-[15px] md:text-[20px]">"Fresh products, fair prices, and zero middlemen"</span>
             </p>
 
             <div class="hero-btns flex flex-col sm:flex-row gap-4 mt-8">
@@ -95,14 +95,14 @@ session_start();
             </div>
 
             <!-- Search Bar -->
-            <div class="search-bar max-w-xl mx-auto mb-6">
+            <div class="search-bar bg-amber-50  max-w-xl mx-auto mb-6">
                 <div class="relative">
-                    <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-stone-400"></i>
+                    <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-stone-600"></i>
                     <input type="text"
                         id="productSearch"
                         placeholder="Search fresh vegetables, fruits, grains..."
                         onkeyup="searchProducts()"
-                        class="w-full pl-10 pr-4 py-3 border border-stone-200 rounded-xl text-sm focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100">
+                        class="w-full pl-10 pr-4 py-3 border border-stone-700 rounded-xl text-sm focus:outline-none focus:border-green-500 focus:ring-2">
                 </div>
             </div>
         </div>

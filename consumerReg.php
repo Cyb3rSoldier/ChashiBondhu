@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,10 @@
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
-    body { font-family: 'Roboto', sans-serif; }
+
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
 </style>
 
 <body class="bg-green-100 min-h-screen overflow-x-hidden">
@@ -68,6 +72,26 @@
                     <p class="text-stone-400 text-sm mt-1">Fill in your details to get started</p>
                 </div>
 
+                <?php if (isset($_SESSION['reg_error'])): ?>
+                    <div class="mb-5 bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-xl text-sm font-medium">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <span><?= $_SESSION['reg_error']; ?></span>
+                        </div>
+                    </div>
+                    <?php unset($_SESSION['reg_error']); ?>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['success_message'])): ?>
+                    <div class="mb-5 bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-xl text-sm font-medium">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span><?= $_SESSION['success_message']; ?></span>
+                        </div>
+                    </div>
+                    <?php unset($_SESSION['success_message']); ?>
+                <?php endif; ?>
+
                 <form action="consumerRegisterSubmit.php" method="POST" class="space-y-4">
 
                     <!-- Full Name -->
@@ -77,7 +101,7 @@
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">
                                 <i class="fa-solid fa-user text-sm"></i>
                             </span>
-                            <input type="text" name="name" placeholder="Your full name" required
+                            <input type="text" name="full_name" placeholder="Your full name" required
                                 class="w-full bg-stone-50 border border-stone-200 text-stone-800 placeholder-stone-400 text-sm pl-10 pr-4 py-3 rounded-xl outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition duration-200">
                         </div>
                     </div>
@@ -125,7 +149,7 @@
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-stone-400">
                                 <i class="fa-solid fa-lock text-sm"></i>
                             </span>
-                            <input type="password" name="password" id="consumerPass" placeholder="Create a password" required
+                            <input type="password" name="password_hash" id="consumerPass" placeholder="Create a password" required
                                 class="w-full bg-stone-50 border border-stone-200 text-stone-800 placeholder-stone-400 text-sm pl-10 pr-12 py-3 rounded-xl outline-none focus:border-green-500 focus:ring-2 focus:ring-green-100 transition duration-200">
                             <button type="button" onclick="togglePassword('consumerPass','consumerPassEye')"
                                 class="absolute right-4 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600">
@@ -215,4 +239,5 @@
     </script>
 
 </body>
+
 </html>

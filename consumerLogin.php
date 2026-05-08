@@ -34,6 +34,26 @@
                     <p class="text-stone-400 text-sm mt-1">Enter your credentials to continue</p>
                 </div>
 
+                <?php if (isset($_SESSION['login_error'])): ?>
+                    <div class="mb-5 bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-xl text-sm font-medium">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <span><?= $_SESSION['login_error']; ?></span>
+                        </div>
+                    </div>
+                    <?php unset($_SESSION['login_error']); ?>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['success_message'])): ?>
+                    <div class="mb-5 bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-xl text-sm font-medium">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span><?= $_SESSION['success_message']; ?></span>
+                        </div>
+                    </div>
+                    <?php unset($_SESSION['success_message']); ?>
+                <?php endif; ?>
+
                 <form action="consumerLoginSubmit.php" method="POST" class="space-y-5">
 
                     <div>
