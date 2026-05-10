@@ -24,6 +24,10 @@
 
                 <ul class="hidden md:flex text-white font-bold gap-8 items-center">
                     <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
+                            href="index.php">Home</a></li>
+                    <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
+                            href="index.php#marketplace">Market Place</a></li>
+                    <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
                             href="consumerDash.php">Dashboard</a></li>
                     <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
                             href="consumerLogout.php">Logout</a></li>
@@ -46,7 +50,11 @@
                     </div>
                     <ul class="text-white flex flex-col mt-4 px-4 gap-1">
                         <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
-                                href="consumerDash.php"><i class="fa-solid fa-house mr-3 text-green-400"></i>Dashboard</a></li>
+                                href="index.php"><i class="fa-solid fa-house mr-3 text-green-400"></i>Home</a></li>
+                        <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
+                                href="index.php#marketplace"><i class="fa-solid fa-store mr-3 text-green-400"></i>Market Place</a></li>
+                        <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
+                                href="consumerDash.php"><i class="fa-solid fa-gauge mr-3 text-green-400"></i>Dashboard</a></li>
                         <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
                                 href="consumerLogout.php"><i class="fa-solid fa-right-from-bracket mr-3 text-green-400"></i>Logout</a></li>
                     </ul>

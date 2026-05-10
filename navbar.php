@@ -31,27 +31,106 @@
                             href="about.php">About Us</a></li>
                     <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
                             href="contact.php">Contact</a></li>
-                    <li class="group relative">
-                        <a class="flex items-center gap-1 hover:text-white transition duration-200 text-sm tracking-wide" href="#">
-                            Login <i class="fa-solid fa-chevron-down text-xs mt-0.5 transition-transform duration-200 group-hover:rotate-180"></i>
-                        </a>
-                        <ul class="w-48 p-2 mt-3 rounded-xl font-semibold text-neutral-800 text-sm bg-white shadow-2xl absolute right-0 
-        opacity-0 group-hover:opacity-100 
-        scale-95 group-hover:scale-100 
-        origin-top-right 
-        transition-all duration-200 
-        pointer-events-none group-hover:pointer-events-auto
-        delay-0 group-hover:delay-0"
-                            style="transition-delay: 0ms; padding-top: 8px;">
-                            <div class="absolute -top-3 left-0 right-0 h-3"></div>
-                            <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition duration-150" href="consumerLogin.php">
-                                    <i class="fa-solid fa-user text-green-700 text-xs w-4"></i> Login as Consumer
-                                </a></li>
-                            <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition duration-150" href="farmerLogin.php">
-                                    <i class="fa-solid fa-tractor text-green-700 text-xs w-4"></i> Login as Farmer
-                                </a></li>
-                        </ul>
-                    </li>
+                    <?php if (isset($_SESSION['consumer_id'])): ?>
+                        <!-- Cart Icon -->
+                        <li>
+                            <a href="cart.php" class="relative flex items-center gap-2 text-white hover:text-green-300 transition duration-200">
+                                <i class="fa-solid fa-basket-shopping text-lg"></i>
+                                <?php
+                                // Cart count badge
+                                $cartStmt = $conn->prepare("SELECT SUM(quantity) as total FROM cart WHERE consumer_id = ?");
+                                $cartStmt->bind_param("i", $_SESSION['consumer_id']);
+                                $cartStmt->execute();
+                                $cartCount = $cartStmt->get_result()->fetch_assoc()['total'] ?? 0;
+                                $cartStmt->close();
+                                ?>
+                                <?php if ($cartCount > 0): ?>
+                                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                                        <?php echo $cartCount > 99 ? '99+' : $cartCount; ?>
+                                    </span>
+                                <?php endif; ?>
+                            </a>
+                        </li>
+                        <!-- Consumer name + logout -->
+                        <li class="group relative">
+                            <a class="flex items-center gap-2 hover:text-green-300 transition duration-200 text-sm" href="#">
+                                <i class="fa-solid fa-circle-user text-lg"></i>
+                                <span class="hidden lg:inline"><?php echo htmlspecialchars($_SESSION['consumer_name'] ?? 'Account'); ?></span>
+                                <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+                            </a>
+                            <ul class="w-48 p-2 mt-3 rounded-xl font-semibold text-neutral-800 text-sm bg-white shadow-2xl absolute right-0
+            opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100
+            origin-top-right transition-all duration-200
+            pointer-events-none group-hover:pointer-events-auto"
+                                style="padding-top:8px;">
+                                <div class="absolute -top-3 left-0 right-0 h-3"></div>
+                                <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition" href="consumerDash.php">
+                                        <i class="fa-solid fa-gauge text-green-700 text-xs w-4"></i> Dashboard
+                                    </a></li>
+                                <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition" href="cart.php">
+                                        <i class="fa-solid fa-basket-shopping text-green-700 text-xs w-4"></i> My Cart
+                                        <?php if ($cartCount > 0): ?>
+                                            <span class="ml-auto bg-red-100 text-red-600 text-xs font-bold px-1.5 py-0.5 rounded-full"><?php echo $cartCount; ?></span>
+                                        <?php endif; ?>
+                                    </a></li>
+                                <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition" href="myOrders.php">
+                                        <i class="fa-solid fa-bag-shopping text-green-700 text-xs w-4"></i> My Orders
+                                    </a></li>
+                                <div class="border-t border-stone-100 my-1"></div>
+                                <li><a class="flex items-center gap-2 hover:bg-red-50 rounded-lg p-2.5 transition text-red-600" href="consumerLogout.php">
+                                        <i class="fa-solid fa-right-from-bracket text-xs w-4"></i> Logout
+                                    </a></li>
+                            </ul>
+                        </li>
+
+                    <?php elseif (isset($_SESSION['farmer_id'])): ?>
+                        <!-- Farmer is logged in -->
+                        <li class="group relative">
+                            <a class="flex items-center gap-2 hover:text-green-300 transition duration-200 text-sm" href="#">
+                                <i class="fa-solid fa-circle-user text-lg"></i>
+                                <span class="hidden lg:inline"><?php echo htmlspecialchars($_SESSION['farmer_name'] ?? 'Farmer'); ?></span>
+                                <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
+                            </a>
+                            <ul class="w-48 p-2 mt-3 rounded-xl font-semibold text-neutral-800 text-sm bg-white shadow-2xl absolute right-0
+            opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100
+            origin-top-right transition-all duration-200
+            pointer-events-none group-hover:pointer-events-auto"
+                                style="padding-top:8px;">
+                                <div class="absolute -top-3 left-0 right-0 h-3"></div>
+                                <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition" href="farmerDash.php">
+                                        <i class="fa-solid fa-gauge text-green-700 text-xs w-4"></i> Dashboard
+                                    </a></li>
+                                <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition" href="my-products.php">
+                                        <i class="fa-solid fa-store text-green-700 text-xs w-4"></i> My Products
+                                    </a></li>
+                                <div class="border-t border-stone-100 my-1"></div>
+                                <li><a class="flex items-center gap-2 hover:bg-red-50 rounded-lg p-2.5 transition text-red-600" href="farmerLogout.php">
+                                        <i class="fa-solid fa-right-from-bracket text-xs w-4"></i> Logout
+                                    </a></li>
+                            </ul>
+                        </li>
+
+                    <?php else: ?>
+                        <!-- Guest — show Login dropdown -->
+                        <li class="group relative">
+                            <a class="flex items-center gap-1 hover:text-white transition duration-200 text-sm tracking-wide" href="#">
+                                Login <i class="fa-solid fa-chevron-down text-xs mt-0.5 transition-transform duration-200 group-hover:rotate-180"></i>
+                            </a>
+                            <ul class="w-48 p-2 mt-3 rounded-xl font-semibold text-neutral-800 text-sm bg-white shadow-2xl absolute right-0
+            opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100
+            origin-top-right transition-all duration-200
+            pointer-events-none group-hover:pointer-events-auto"
+                                style="transition-delay:0ms;padding-top:8px;">
+                                <div class="absolute -top-3 left-0 right-0 h-3"></div>
+                                <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition duration-150" href="consumerLogin.php">
+                                        <i class="fa-solid fa-user text-green-700 text-xs w-4"></i> Login as Consumer
+                                    </a></li>
+                                <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition duration-150" href="farmerLogin.php">
+                                        <i class="fa-solid fa-tractor text-green-700 text-xs w-4"></i> Login as Farmer
+                                    </a></li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
                 </ul>
 
                 <button class="p-2 md:hidden text-white" onclick="handelMenu()">
@@ -79,12 +158,31 @@
                         <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
                                 href="contact.php"><i class="fa-solid fa-envelope mr-3 text-green-400"></i>Contact</a></li>
                         <div class="border-t border-green-700 my-2"></div>
-                        <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
-                                href="farmerLogin.php"><i class="fa-solid fa-tractor mr-3 text-green-400"></i>Login as
-                                Farmer</a></li>
-                        <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
-                                href="consumerLogin.php"><i class="fa-solid fa-user mr-3 text-green-400"></i>Login as
-                                Consumer</a></li>
+                        <div class="border-t border-green-700 my-2"></div>
+                        <?php if (isset($_SESSION['consumer_id'])): ?>
+                            <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
+                                    href="cart.php"><i class="fa-solid fa-basket-shopping mr-3 text-green-400"></i>My Cart
+                                    <?php if ($cartCount > 0): ?>
+                                        <span class="ml-2 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full"><?php echo $cartCount; ?></span>
+                                    <?php endif; ?>
+                                </a></li>
+                            <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
+                                    href="consumerDash.php"><i class="fa-solid fa-gauge mr-3 text-green-400"></i>Dashboard</a></li>
+                            <li><a class="hover:bg-red-900 p-3.5 rounded-xl block font-semibold text-base transition text-red-300"
+                                    href="consumerLogout.php"><i class="fa-solid fa-right-from-bracket mr-3"></i>Logout</a></li>
+                        <?php elseif (isset($_SESSION['farmer_id'])): ?>
+                            <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
+                                    href="farmerDash.php"><i class="fa-solid fa-gauge mr-3 text-green-400"></i>Dashboard</a></li>
+                            <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
+                                    href="my-products.php"><i class="fa-solid fa-store mr-3 text-green-400"></i>My Products</a></li>
+                            <li><a class="hover:bg-red-900 p-3.5 rounded-xl block font-semibold text-base transition text-red-300"
+                                    href="farmerLogout.php"><i class="fa-solid fa-right-from-bracket mr-3"></i>Logout</a></li>
+                        <?php else: ?>
+                            <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
+                                    href="farmerLogin.php"><i class="fa-solid fa-tractor mr-3 text-green-400"></i>Login as Farmer</a></li>
+                            <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
+                                    href="consumerLogin.php"><i class="fa-solid fa-user mr-3 text-green-400"></i>Login as Consumer</a></li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </nav>

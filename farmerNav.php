@@ -24,6 +24,8 @@
 
                 <ul class="hidden md:flex text-white font-bold gap-8 items-center">
                     <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
+                            href="index.php">Home</a></li>
+                    <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
                             href="farmerDash.php">Dashboard</a></li>
                     <li><a class="nav-link hover:text-white transition duration-200 text-sm tracking-wide"
                             href="farmerLogout.php">Logout</a></li>
@@ -46,7 +48,9 @@
                     </div>
                     <ul class="text-white flex flex-col mt-4 px-4 gap-1">
                         <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
-                                href="farmerDash.php"><i class="fa-solid fa-house mr-3 text-green-400"></i>Dashboard</a></li>
+                                href="index.php"><i class="fa-solid fa-house mr-3 text-green-400"></i>Home</a></li>
+                        <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
+                                href="farmerDash.php"><i class="fa-solid fa-gauge mr-3 text-green-400"></i>Dashboard</a></li>
                         <li><a class="hover:bg-green-800 p-3.5 rounded-xl block font-semibold text-base transition"
                                 href="farmerLogout.php"><i class="fa-solid fa-right-from-bracket mr-3 text-green-400"></i>Logout</a></li>
                     </ul>

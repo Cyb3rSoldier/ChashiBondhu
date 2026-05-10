@@ -6,7 +6,18 @@ if (!isset($_SESSION['farmer_id'])) {
     exit();
 }
 
+require_once 'config.php';
+
 $name = $_SESSION['farmer_name'];
+$farmerId = $_SESSION['farmer_id'];
+
+$stmt = $conn->prepare("SELECT * FROM products WHERE farmer_id = ?");
+$stmt->bind_param("i", $farmerId);
+$stmt->execute();
+
+$products = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -125,9 +136,11 @@ $name = $_SESSION['farmer_name'];
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-stone-400 text-xs font-semibold uppercase tracking-wider">Total Products</p>
-                        <h2 class="text-5xl font-extrabold text-green-950 mt-2 leading-none">0</h2>
+                        <p class="text-5xl font-extrabold text-green-950 mt-2 leading-none"><?php echo count($products); ?></p>
+
                         <p class="text-xs text-stone-400 mt-2">Listed in marketplace</p>
                     </div>
+
                     <div class="w-14 h-14 rounded-2xl bg-green-100 text-green-700 flex items-center justify-center text-xl shrink-0">
                         <i class="fa-solid fa-box"></i>
                     </div>

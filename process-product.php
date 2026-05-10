@@ -50,20 +50,23 @@ if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPL
     } elseif ($_FILES['product_image']['size'] > 5 * 1024 * 1024) {
         $errors[] = 'Image size must be less than 5MB.';
     } else {
-        $uploadDir = '../uploads/products/';
+        // Use absolute path for saving
+        $uploadDir = __DIR__ . '/uploads/products/';
+
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0755, true);
         }
+
         $filename    = 'product_' . time() . '_' . rand(1000, 9999) . '.' . $ext;
         $destination = $uploadDir . $filename;
 
         if (move_uploaded_file($_FILES['product_image']['tmp_name'], $destination)) {
+            // Store relative path for display in browser
             $imagePath = 'uploads/products/' . $filename;
         } else {
             $errors[] = 'Failed to upload image. Check folder permissions.';
         }
     }
-
 } else {
     $errors[] = 'Product image is required.';
 }
@@ -78,7 +81,8 @@ if (!empty($errors)) {
 
 // ── Generate slug ────────────────────────────────────────
 
-function createSlug(string $text): string {
+function createSlug(string $text): string
+{
     $text = strtolower(trim($text));
     $text = preg_replace('/[^a-z0-9\s-]/', '', $text);
     $text = preg_replace('/[\s-]+/', '-', $text);
@@ -133,4 +137,3 @@ if ($stmt->execute()) {
     header('Location: add-product.php');
     exit();
 }
-?>

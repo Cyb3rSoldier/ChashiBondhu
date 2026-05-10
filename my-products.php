@@ -40,9 +40,6 @@ $stmt->close();
         <!-- Header -->
         <div class="flex items-center justify-between mb-8">
             <div>
-                <a href="farmerDashboard.php" class="inline-flex items-center gap-2 text-green-700 text-sm font-semibold hover:text-green-900 transition mb-2">
-                    <i class="fa-solid fa-arrow-left text-xs"></i> Back to Dashboard
-                </a>
                 <h1 class="text-2xl font-bold text-green-950">My Products</h1>
                 <p class="text-stone-400 text-sm mt-0.5">
                     <?php echo count($products); ?> product<?php echo count($products) !== 1 ? 's' : ''; ?> listed
@@ -106,7 +103,9 @@ $stmt->close();
 
                         <!-- Image -->
                         <div class="relative">
-                            <img src="<?php echo $product['image_path'] ? $product['image_path'] : 'asset/img/placeholder-product.jpg'; ?>"
+                            <img src="<?php echo $product['image_path']
+                                            ? htmlspecialchars($product['image_path'])
+                                            : 'asset/img/placeholder-product.jpg'; ?>"
                                 alt="<?php echo htmlspecialchars($product['product_name']); ?>"
                                 class="w-full h-44 object-cover">
 
