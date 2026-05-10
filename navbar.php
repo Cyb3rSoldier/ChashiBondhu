@@ -73,7 +73,7 @@
                                             <span class="ml-auto bg-red-100 text-red-600 text-xs font-bold px-1.5 py-0.5 rounded-full"><?php echo $cartCount; ?></span>
                                         <?php endif; ?>
                                     </a></li>
-                                <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition" href="myOrders.php">
+                                <li><a class="flex items-center gap-2 hover:bg-green-50 rounded-lg p-2.5 transition" href="my-orders.php">
                                         <i class="fa-solid fa-bag-shopping text-green-700 text-xs w-4"></i> My Orders
                                     </a></li>
                                 <div class="border-t border-stone-100 my-1"></div>

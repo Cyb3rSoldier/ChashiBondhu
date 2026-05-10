@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'config.php';
 
 if (!isset($_SESSION['consumer_id'])) {
     header("Location: consumerLogin.php");
@@ -8,6 +9,39 @@ if (!isset($_SESSION['consumer_id'])) {
 
 $name = $_SESSION['consumer_name'];
 $email = $_SESSION['consumer_email'];
+
+// Fetch all orders
+$stmt = $conn->prepare("
+    SELECT *
+    FROM orders
+    WHERE consumer_id = ?
+");
+
+$stmt->bind_param("i", $_SESSION['consumer_id']);
+$stmt->execute();
+
+$result = $stmt->get_result();
+$orders = $result->fetch_all(MYSQLI_ASSOC);
+
+$stmt->close();
+
+
+// Count pending orders
+$pendingStmt = $conn->prepare("
+    SELECT COUNT(*) as total
+    FROM orders
+    WHERE consumer_id = ?
+    AND order_status = 'pending'
+");
+
+$pendingStmt->bind_param("i", $_SESSION['consumer_id']);
+$pendingStmt->execute();
+
+$pendingResult = $pendingStmt->get_result()->fetch_assoc();
+
+$pendingOrders = $pendingResult['total'];
+
+$pendingStmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +65,7 @@ $email = $_SESSION['consumer_email'];
 
 <body class="bg-[#f2f5f0] overflow-x-hidden min-h-screen">
 
-    <?php include('counsumerNav.php'); ?>
+    <?php include('consumerNav.php'); ?>
 
     <main class="max-w-7xl mx-auto px-5 md:px-8 pt-24 pb-14">
 
@@ -79,7 +113,7 @@ $email = $_SESSION['consumer_email'];
 
                         </a>
 
-                        <a href="consumer/my-orders.php"
+                        <a href="my-orders.php"
                             class="border border-white/25 hover:bg-white/10 transition font-semibold text-sm
                                    px-6 py-3 rounded-xl flex items-center gap-2">
 
@@ -162,9 +196,7 @@ $email = $_SESSION['consumer_email'];
                             Orders Placed
                         </p>
 
-                        <h2 class="text-5xl font-extrabold text-green-950 mt-2 leading-none">
-                            0
-                        </h2>
+                        <p class="text-5xl font-extrabold text-green-950 mt-2 leading-none"><?php echo count($orders); ?></p>
 
                         <p class="text-xs text-stone-400 mt-2">
                             Total purchases
@@ -188,7 +220,7 @@ $email = $_SESSION['consumer_email'];
                         </p>
 
                         <h2 class="text-5xl font-extrabold text-green-950 mt-2 leading-none">
-                            0
+                            <?php echo $pendingOrders; ?>
                         </h2>
 
                         <p class="text-xs text-stone-400 mt-2">
@@ -297,7 +329,7 @@ $email = $_SESSION['consumer_email'];
                     </a>
 
                     <!-- ORDERS -->
-                    <a href="consumer/my-orders.php"
+                    <a href="my-orders.php"
                         class="group bg-amber-50 hover:bg-amber-100 border border-amber-100
                                rounded-2xl p-6 transition duration-300 flex flex-col">
 

@@ -18,6 +18,57 @@ $stmt->execute();
 $products = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 $stmt->close();
+
+// ==========================
+// TOTAL PRODUCTS
+// ==========================
+$totalProducts = count($products);
+
+// ==========================
+// TOTAL ORDERS RECEIVED
+// ==========================
+$orderStmt = $conn->prepare("
+    SELECT COUNT(DISTINCT oi.order_id) as total_orders
+    FROM order_items oi
+    WHERE oi.farmer_id = ?
+");
+$orderStmt->bind_param("i", $farmerId);
+$orderStmt->execute();
+$orderResult  = $orderStmt->get_result()->fetch_assoc();
+$totalOrders  = $orderResult['total_orders'] ?? 0;
+$orderStmt->close();
+
+// ==========================
+// PENDING ORDERS
+// ==========================
+$pendingStmt = $conn->prepare("
+    SELECT COUNT(DISTINCT oi.order_id) as pending_orders
+    FROM order_items oi
+    JOIN orders o ON oi.order_id = o.id
+    WHERE oi.farmer_id = ?
+    AND o.order_status = 'pending'
+");
+$pendingStmt->bind_param("i", $farmerId);
+$pendingStmt->execute();
+$pendingResult = $pendingStmt->get_result()->fetch_assoc();
+$pendingOrders = $pendingResult['pending_orders'] ?? 0;
+$pendingStmt->close();
+
+// ==========================
+// TOTAL EARNINGS
+// ==========================
+$earnStmt = $conn->prepare("
+    SELECT SUM(oi.total_price) as total_earnings
+    FROM order_items oi
+    JOIN orders o ON oi.order_id = o.id
+    WHERE oi.farmer_id = ?
+    AND o.order_status != 'cancelled'
+");
+$earnStmt->bind_param("i", $farmerId);
+$earnStmt->execute();
+$earnResult    = $earnStmt->get_result()->fetch_assoc();
+$totalEarnings = $earnResult['total_earnings'] ?? 0;
+$earnStmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -76,7 +127,7 @@ $stmt->close();
                                   px-6 py-3 rounded-xl flex items-center gap-2 shadow-md">
                             <i class="fa-solid fa-plus"></i>Add Product
                         </a>
-                        <a href="farmer/orders.php"
+                        <a href="orders.php"
                             class="border border-white/25 hover:bg-white/10 transition font-semibold text-sm
                                   px-6 py-3 rounded-xl flex items-center gap-2">
                             <i class="fa-solid fa-cart-shopping"></i>View Orders
@@ -136,7 +187,7 @@ $stmt->close();
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-stone-400 text-xs font-semibold uppercase tracking-wider">Total Products</p>
-                        <p class="text-5xl font-extrabold text-green-950 mt-2 leading-none"><?php echo count($products); ?></p>
+                        <p class="text-5xl font-extrabold text-green-950 mt-2 leading-none"><?php echo $totalProducts; ?></p>
 
                         <p class="text-xs text-stone-400 mt-2">Listed in marketplace</p>
                     </div>
@@ -154,7 +205,9 @@ $stmt->close();
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-stone-400 text-xs font-semibold uppercase tracking-wider">Orders Received</p>
-                        <h2 class="text-5xl font-extrabold text-green-950 mt-2 leading-none">0</h2>
+                        <h2 class="text-5xl font-extrabold text-green-950 mt-2 leading-none">
+                            <?php echo $totalOrders; ?>
+                        </h2>
                         <p class="text-xs text-stone-400 mt-2">All time orders</p>
                     </div>
                     <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl shrink-0">
@@ -170,7 +223,9 @@ $stmt->close();
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-stone-400 text-xs font-semibold uppercase tracking-wider">Total Earnings</p>
-                        <h2 class="text-5xl font-extrabold text-green-950 mt-2 leading-none">৳0</h2>
+                        <h2 class="text-5xl font-extrabold text-green-950 mt-2 leading-none">
+                            ৳<?php echo number_format($totalEarnings, 0); ?>
+                        </h2>
                         <p class="text-xs text-stone-400 mt-2">Lifetime revenue</p>
                     </div>
                     <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl shrink-0">
@@ -186,7 +241,9 @@ $stmt->close();
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-stone-400 text-xs font-semibold uppercase tracking-wider">Pending Orders</p>
-                        <h2 class="text-5xl font-extrabold text-green-950 mt-2 leading-none">0</h2>
+                        <h2 class="text-5xl font-extrabold text-green-950 mt-2 leading-none">
+                            <?php echo $pendingOrders; ?>
+                        </h2>
                         <p class="text-xs text-stone-400 mt-2">Awaiting fulfillment</p>
                     </div>
                     <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl shrink-0">
@@ -248,7 +305,7 @@ $stmt->close();
                     </a>
 
                     <!-- Orders -->
-                    <a href="farmer/orders.php"
+                    <a href="orders.php"
                         class="action-card group bg-blue-50 hover:bg-blue-100 border border-blue-100
                               rounded-2xl p-6 transition duration-300 flex flex-col no-underline">
                         <div class="action-icon w-14 h-14 rounded-2xl bg-blue-600 text-white
