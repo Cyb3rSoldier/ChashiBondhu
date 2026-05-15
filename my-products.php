@@ -103,47 +103,24 @@ $stmt->close();
 
                         <!-- Image -->
                         <div class="relative">
-
-                            <?php
-                            $image = 'asset/img/placeholder-product.jpg';
-
-                            if (!empty($product['image_path'])) {
-
-                                $fullPath = __DIR__ . '/' . $product['image_path'];
-
-                                if (file_exists($fullPath)) {
-                                    $image = 'http://localhost/Web-Project/ChashiBondhu/' . $product['image_path'];
-                                }
-                            }
-                            ?>
-
-                            <img
-                                src="<?php echo $image; ?>"
+                            <img src="<?php echo $product['image_path']
+                                            ? htmlspecialchars($product['image_path'])
+                                            : 'asset/img/placeholder-product.jpg'; ?>"
                                 alt="<?php echo htmlspecialchars($product['product_name']); ?>"
                                 class="w-full h-44 object-cover">
 
                             <!-- Status Badge -->
                             <span class="absolute top-2 left-2 text-xs font-bold px-2.5 py-1 rounded-full
-    <?php
-                    if ($product['status'] === 'active') {
-                        echo 'bg-green-100 text-green-700';
-                    } elseif ($product['status'] === 'out_of_stock') {
-                        echo 'bg-red-100 text-red-600';
-                    } else {
-                        echo 'bg-stone-100 text-stone-500';
-                    }
-    ?>">
-
+                            <?php
+                            if ($product['status'] === 'active')        echo 'bg-green-100 text-green-700';
+                            elseif ($product['status'] === 'out_of_stock') echo 'bg-red-100 text-red-600';
+                            else                                         echo 'bg-stone-100 text-stone-500';
+                            ?>">
                                 <?php
-                                if ($product['status'] === 'active') {
-                                    echo '● Active';
-                                } elseif ($product['status'] === 'out_of_stock') {
-                                    echo '● Out of Stock';
-                                } else {
-                                    echo '● Hidden';
-                                }
+                                if ($product['status'] === 'active')        echo '● Active';
+                                elseif ($product['status'] === 'out_of_stock') echo '● Out of Stock';
+                                else                                         echo '● Hidden';
                                 ?>
-
                             </span>
 
                             <!-- Organic Badge -->
@@ -152,7 +129,6 @@ $stmt->close();
                                     🌿 Organic
                                 </span>
                             <?php endif; ?>
-
                         </div>
 
                         <!-- Info -->
