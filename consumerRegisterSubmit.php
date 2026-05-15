@@ -98,7 +98,7 @@ $stmt->bind_param(
 
 if ($stmt->execute()) {
 
-    $_SESSION['success_message'] = "Registration successful! Please wait for admin verification before logging in.";
+    $_SESSION['success_message'] = "Registration successful! Please Login.";
 
     $stmt->close();
     $conn->close();

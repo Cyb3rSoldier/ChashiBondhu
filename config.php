@@ -1,9 +1,9 @@
 <?php
 
-$host = "localhost";  /* */
-$user = "root";  /* */
-$password = "";  /* */
-$database = "chashibondhu";  /* */
+$host = "localhost";  /* sql206.infinityfree.com */
+$user = "root";  /* if0_41922519 */
+$password = "";  /* chashibondhu123 */
+$database = "chashibondhu";  /* if0_41922519_chashibondhu */
 
 $conn = new mysqli($host, $user, $password, $database);
 
