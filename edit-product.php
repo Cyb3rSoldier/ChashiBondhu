@@ -45,8 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($unit))        $errors[] = 'Unit is required.';
     if (empty($description)) $errors[] = 'Description is required.';
 
-    // Handle new image upload (optional on edit)
-    $imagePath = $product['image_path']; // keep existing by default
+    // Handle new image upload
+    $imagePath = $product['image_path'];
 
     if (isset($_FILES['product_image']) && $_FILES['product_image']['error'] === UPLOAD_ERR_OK) {
 

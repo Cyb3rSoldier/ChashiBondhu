@@ -35,13 +35,18 @@ $total       = $subtotal + $deliveryFee;
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cart — ChashiBondhu</title>
+    <title>Consumer Dashboard — ChashiBondhu</title>
     <link rel="website icon" type="png" href="asset/img/ChashiBondhu logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
@@ -66,7 +71,8 @@ $total       = $subtotal + $deliveryFee;
         <?php if (isset($_SESSION['cart_message'])): ?>
             <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-2xl mb-5 text-sm font-medium flex items-center gap-2">
                 <i class="fa-solid fa-circle-check shrink-0"></i>
-                <?php echo $_SESSION['cart_message']; unset($_SESSION['cart_message']); ?>
+                <?php echo $_SESSION['cart_message'];
+                unset($_SESSION['cart_message']); ?>
             </div>
         <?php endif; ?>
 
@@ -75,45 +81,45 @@ $total       = $subtotal + $deliveryFee;
             <!-- Cart Items -->
             <div class="space-y-3 mb-5" id="cartItems">
                 <?php foreach ($cartItems as $item): ?>
-                <div class="bg-white rounded-2xl p-4 shadow-sm border border-stone-100 flex gap-4 items-start" id="cart-item-<?php echo $item['id']; ?>">
+                    <div class="bg-white rounded-2xl p-4 shadow-sm border border-stone-100 flex gap-4 items-start" id="cart-item-<?php echo $item['id']; ?>">
 
-                    <img src="<?php echo $item['image_path'] ? htmlspecialchars($item['image_path']) : 'asset/img/placeholder-product.jpg'; ?>"
-                        alt="<?php echo htmlspecialchars($item['product_name']); ?>"
-                        class="w-20 h-20 rounded-xl object-cover shrink-0">
+                        <img src="<?php echo $item['image_path'] ? htmlspecialchars($item['image_path']) : 'asset/img/placeholder-product.jpg'; ?>"
+                            alt="<?php echo htmlspecialchars($item['product_name']); ?>"
+                            class="w-20 h-20 rounded-xl object-cover shrink-0">
 
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-green-950 text-sm truncate"><?php echo htmlspecialchars($item['product_name']); ?></h3>
-                        <p class="text-xs text-stone-400 mt-0.5">By <?php echo htmlspecialchars($item['farmer_name'] ?? 'Unknown'); ?></p>
-                        <p class="text-green-700 font-bold text-base mt-1">
-                            ৳<?php echo number_format($item['price'], 0); ?>
-                            <span class="text-stone-400 font-normal text-xs">/ <?php echo $item['unit']; ?></span>
-                        </p>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-green-950 text-sm truncate"><?php echo htmlspecialchars($item['product_name']); ?></h3>
+                            <p class="text-xs text-stone-400 mt-0.5">By <?php echo htmlspecialchars($item['farmer_name'] ?? 'Unknown'); ?></p>
+                            <p class="text-green-700 font-bold text-base mt-1">
+                                ৳<?php echo number_format($item['price'], 0); ?>
+                                <span class="text-stone-400 font-normal text-xs">/ <?php echo $item['unit']; ?></span>
+                            </p>
 
-                        <div class="flex items-center justify-between mt-2">
-                            <!-- Qty controls -->
-                            <div class="flex items-center gap-0 bg-stone-100 rounded-xl overflow-hidden">
-                                <button onclick="updateQty(<?php echo $item['id']; ?>, <?php echo $item['quantity'] - 1; ?>)"
-                                    class="w-8 h-8 flex items-center justify-center text-green-800 font-bold hover:bg-stone-200 transition text-base">−</button>
-                                <span class="w-8 text-center font-bold text-green-950 text-sm" id="qty-<?php echo $item['id']; ?>">
-                                    <?php echo $item['quantity']; ?>
+                            <div class="flex items-center justify-between mt-2">
+                                <!-- Qty controls -->
+                                <div class="flex items-center gap-0 bg-stone-100 rounded-xl overflow-hidden">
+                                    <button onclick="updateQty(<?php echo $item['id']; ?>, <?php echo $item['quantity'] - 1; ?>)"
+                                        class="w-8 h-8 flex items-center justify-center text-green-800 font-bold hover:bg-stone-200 transition text-base">−</button>
+                                    <span class="w-8 text-center font-bold text-green-950 text-sm" id="qty-<?php echo $item['id']; ?>">
+                                        <?php echo $item['quantity']; ?>
+                                    </span>
+                                    <button onclick="updateQty(<?php echo $item['id']; ?>, <?php echo $item['quantity'] + 1; ?>)"
+                                        class="w-8 h-8 flex items-center justify-center text-green-800 font-bold hover:bg-stone-200 transition text-base">+</button>
+                                </div>
+
+                                <!-- Item total -->
+                                <span class="font-bold text-green-700 text-sm" id="item-total-<?php echo $item['id']; ?>">
+                                    ৳<?php echo number_format($item['price'] * $item['quantity'], 0); ?>
                                 </span>
-                                <button onclick="updateQty(<?php echo $item['id']; ?>, <?php echo $item['quantity'] + 1; ?>)"
-                                    class="w-8 h-8 flex items-center justify-center text-green-800 font-bold hover:bg-stone-200 transition text-base">+</button>
+
+                                <!-- Remove -->
+                                <button onclick="removeItem(<?php echo $item['id']; ?>)"
+                                    class="text-xs bg-red-50 border border-red-100 text-red-500 hover:bg-red-100 px-3 py-1.5 rounded-xl font-semibold transition">
+                                    <i class="fa-solid fa-trash text-xs mr-1"></i>Remove
+                                </button>
                             </div>
-
-                            <!-- Item total -->
-                            <span class="font-bold text-green-700 text-sm" id="item-total-<?php echo $item['id']; ?>">
-                                ৳<?php echo number_format($item['price'] * $item['quantity'], 0); ?>
-                            </span>
-
-                            <!-- Remove -->
-                            <button onclick="removeItem(<?php echo $item['id']; ?>)"
-                                class="text-xs bg-red-50 border border-red-100 text-red-500 hover:bg-red-100 px-3 py-1.5 rounded-xl font-semibold transition">
-                                <i class="fa-solid fa-trash text-xs mr-1"></i>Remove
-                            </button>
                         </div>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
 
@@ -161,29 +167,34 @@ $total       = $subtotal + $deliveryFee;
         function updateQty(cartId, newQty) {
             if (newQty < 0) return;
             fetch('updateCart.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'cart_id=' + cartId + '&quantity=' + newQty
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) location.reload();
-            });
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'cart_id=' + cartId + '&quantity=' + newQty
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) location.reload();
+                });
         }
 
         function removeItem(cartId) {
             if (!confirm('Remove this item from cart?')) return;
             fetch('removeFromCart.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'cart_id=' + cartId
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) location.reload();
-            });
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: 'cart_id=' + cartId
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) location.reload();
+                });
         }
     </script>
 
 </body>
+
 </html>

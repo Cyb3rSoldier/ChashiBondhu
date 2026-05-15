@@ -1,9 +1,12 @@
 <?php
 session_start();
+require_once 'config.php';
+
 if (!isset($_SESSION['farmer_id'])) {
     header('Location: farmerLogin.php');
     exit();
 }
+
 $csrf_token = bin2hex(random_bytes(32));
 ?>
 

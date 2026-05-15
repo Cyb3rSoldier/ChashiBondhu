@@ -84,7 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['order_success'] = $orderNumber;
             header('Location: orderSuccess.php');
             exit();
-
         } catch (Exception $e) {
             $conn->rollback();
             error_log("Checkout error: " . $e->getMessage());
@@ -96,16 +95,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout — ChashiBondhu</title>
+    <title>Consumer Dashboard — ChashiBondhu</title>
     <link rel="website icon" type="png" href="asset/img/ChashiBondhu logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<style> body { font-family: 'Roboto', sans-serif; } </style>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
 
 <body class="bg-stone-100 min-h-screen overflow-x-hidden">
 
@@ -189,4 +197,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
 </body>
+
 </html>
